@@ -116,10 +116,76 @@ def firstOneElseZero(vect):
 #####################################################
 
 
+def strictlyLowerTriMatrix(matrix):
+    result = []
+    vectSubA = matrixMulti.getAllCols(matrix)
+    for index, columnVect in enumerate(vectSubA):
+        vectSubB = setColumnSLTMValue(columnVect, index)
+        result.append(vectSubB)
+    # rotating back to original vector dimensions
+    vectSub = matrixMulti.getAllCols(result)
+    return vectSub
+
+
+def setColumnSLTMValue(vect, index):
+    if(index >= len(vect)):
+        raise Exception(
+            "\n >> Error! Invalid index \n >> vectorLength:%s \n >> index:%s " % (len(vect), index))
+    vectSubA = vect[:index]
+    vectSubB = vect[index:]
+    vectA = []
+    vectB = []
+    # Becuase at first iteration vectSubA will be empty array
+    if(len(vectSubA) > 0):
+        vectA = vector.zeroOfVect(vectSubA)
+    vectB = onlyFirstElmZero(vectSubB)
+    return vectA+vectB
+
+
+def onlyFirstElmZero(vect):
+    vect[0] = 0
+    return vect
+
+#####################################################
+########### unit lower triangular matrix ##########
+#####################################################
+
+
+def setUnitLowerTriMatrix(matrix):
+    result = []
+    vectSubA = matrixMulti.getAllCols(matrix)
+    for index, columnVect in enumerate(vectSubA):
+        vectSubB = setColumnULTMValue(columnVect, index)
+        result.append(vectSubB)
+    # rotating back to original vector dimensions
+    vectSub = matrixMulti.getAllCols(result)
+    return vectSub
+
+
+def setColumnULTMValue(vect, index):
+    if(index >= len(vect)):
+        raise Exception(
+            "\n >> Error! Invalid index \n >> vectorLength:%s \n >> index:%s " % (len(vect), index))
+    vectSubA = vect[:index]
+    vectSubB = vect[index:]
+    vectA = []
+    vectB = []
+    # Becuase at first iteration vectSubA will be empty array
+    if(len(vectSubA) > 0):
+        vectA = vector.zeroOfVect(vectSubA)
+    vectB = OnlyfirstElmOne(vectSubB)
+    return vectA+vectB
+
+
+def OnlyfirstElmOne(vect):
+    vect[0] = 1
+    return vect
+
+
 vt = [[8, 9, 4], [3, 7, 2], [4, 5, 3]]
 #vtb = [9, 99, 999]
 
-print(setToUnitUpperTriMatrix(vt))
+print(setUnitLowerTriMatrix(vt))
 
 # 8 9 4
 # 3 7 2
@@ -142,6 +208,12 @@ print(setToUnitUpperTriMatrix(vt))
 # 0 0 0
 # 3 0 0
 # 4 5 0
+
+##### Visualization ULT Matrix ######
+# 1 0 0
+# 3 1 0
+# 4 5 1
+
 
 # 0 0 0 0
 # 4 0 0 0
