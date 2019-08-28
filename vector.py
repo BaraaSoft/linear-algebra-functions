@@ -37,7 +37,7 @@ def copy(vectA, vectB):
 
 # takes a matrix 'vect' and mutliply or its elements by a value 'alpha'
 
-
+#test
 def scale(vect, alpha):
     result = []
     if not(isColumnVect(vect) or isRowVect(vect)):
